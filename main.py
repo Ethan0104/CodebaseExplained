@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--path", required=True, help="The path to the directory")
 parser.add_argument("--excludeFolders", default="", help="Semicolon-separated list of folders to exclude")
 parser.add_argument("--excludeFiles", default="", help="Semicolon-separated list of files to exclude")
+parser.add_argument('--onlyTree', action='store_true', help="print file structure only")
 
 # defaults
 DEFAULT_EXCLUDE_FOLDERS = ['.git', 'node_modules', '__pycache__']
@@ -105,11 +106,14 @@ if __name__ == '__main__':
     finalString = STARTING_MESSAGE
     finalString += "Project File Structure: \n"
     fileStructure = getFileStructure(path, excludeFolders, excludeFiles)
-    finalString += fileStructure + "\n\nAll significant project files:\n"
-    
-    filePaths = getFileAbsPaths(path, excludeFolders, excludeFiles)
-    for filePath in filePaths:
-        finalString += getFileContent(path, filePath)
+    finalString += fileStructure
+
+    if not args.onlyTree:
+        finalString += "\n\nAll significant project files:\n"
+        
+        filePaths = getFileAbsPaths(path, excludeFolders, excludeFiles)
+        for filePath in filePaths:
+            finalString += getFileContent(path, filePath)
     
     with open('output.txt', 'w') as outputFile:
         outputFile.write(finalString)
