@@ -12,15 +12,15 @@ You will be my developer assistant. I'm going to provide you with all the inform
 
 `FANTASTIC_REPO_NAME
 
-|   docker-compose.yml
+|       docker-compose.yml
 
-|      useless_folder
+|       useless_folder
 
-|      app
+|       app
 
-|      |      __init__.py
+|       |       __init__.py
 
-|      |      app.py`
+|       |       app.py`
 
 
 All significant project files:
