@@ -2,7 +2,9 @@
 
 This is a helpful too designed to funnel all information about another codebase into a format which GPT-4 can read. You can then ask GPT-4 about things about this codebase to accelerate you understanding of it.
 
-## Parameters
+## How to use
+Run `python3 main.py --path ABS_PATH_TO_YOUR_CODEBASE_OF_INTEREST`
+
 Use --excludeFolders to exclude specific folders and --excludeFiles to exclude specifc files (of course). Default excludes are already hard coded. Start without using these flags, and if you find irrelevant content in your `output.txt`, then use these flags.
 
 ## Prompt Engineering:
