@@ -9,6 +9,7 @@ Use --excludeFolders to exclude specific folders and --excludeFiles to exclude s
 The prompt fed to GPT-4 will look like this: 
 
 You will be my developer assistant. I'm going to provide you with all the information about my codebase and your job is to help me understand it. After I provide all the information, you will respond to me by very briefly summarizing the technology and tech stack used. Then I will ask you further questions.
+
 FANTASTIC_REPO_NAME
 |   docker-compose.yml
 |   useless_folder
@@ -16,13 +17,17 @@ FANTASTIC_REPO_NAME
 |   |   __init__.py
 |   |   app.py
 
+
 All significant project files:
 
 docker-compose.yml
+
 blah
 
 app/__init.py
+
 bleh
 
 app/app.py
+
 bluh
