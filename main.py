@@ -13,8 +13,12 @@ parser.add_argument("--excludeFiles", default="", help="Semicolon-separated list
 parser.add_argument('--onlyTree', action='store_true', help="print file structure only")
 
 # defaults
-DEFAULT_EXCLUDE_FOLDERS = ['.git', 'node_modules', '__pycache__']
-DEFAULT_EXCLUDE_FILES = ['.DS_Store', '*.md', '*.pyc', 'package-lock.json']
+DEFAULT_EXCLUDE_FOLDERS = []
+DEFAULT_EXCLUDE_FILES = []
+with open('default_excludes.txt', 'r') as f:
+    raw_folders, raw_files = f.read().split('---')
+    DEFAULT_EXCLUDE_FOLDERS = raw_folders.split('\n')
+    DEFAULT_EXCLUDE_FILES = raw_files.split('\n')
 STARTING_MESSAGE = "You will be my developer assistant. I'm going to provide you with all the information about my codebase and your job is to help me understand it. After I provide all the information, you will respond to me by very briefly summarizing the technology and tech stack used. Then I will ask you further questions.\n"
 
 # Parse the command-line arguments
@@ -32,12 +36,12 @@ def getFileStructure(path, excludeFolders=[], excludeFiles=[]):
 
         # Add the current directory to the structure list
         indent_level = root.count(os.sep) - path.count(os.sep)
-        structure.append("{}{}/".format("|   " * indent_level, os.path.basename(root)))
+        structure.append("{}{}/".format("| " * indent_level, os.path.basename(root)))
 
         # Add each file in the current directory to the structure list
         for file in files:
             indent_level = root.count(os.sep) - path.count(os.sep) + 1
-            structure.append("{}{}".format("|   " * indent_level, file))
+            structure.append("{}{}".format("| " * indent_level, file))
 
     # Return the directory structure as a formatted string
     return "\n".join(structure)
@@ -71,6 +75,7 @@ def getFileAbsPaths(path, excludeFolders=[], excludeFiles=[]):
 def getFileContent(root_path, filePath):
     # Read the contents of the file
     with open(filePath, "r") as file:
+        print(filePath)
         content = file.read()
 
     # Create a string with the file path and contents
